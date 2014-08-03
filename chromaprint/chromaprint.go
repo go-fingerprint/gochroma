@@ -50,7 +50,7 @@ type ChromaprintContext struct {
 	algorithm int
 }
 
-// NewCromaprint creates new CromaprintContext with given algorithm.
+// NewChromaprint creates new CromaprintContext with given algorithm.
 // Returned ChromaprintContext must be freed with Free().
 func NewChromaprint(algorithm int) *ChromaprintContext {
 	return &ChromaprintContext{C.chromaprint_new(C.int(algorithm)), algorithm}
