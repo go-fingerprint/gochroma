@@ -127,7 +127,7 @@ func (ctx *ChromaprintContext) GetRawFingerprint() (fprint []int32, err error) {
 	defer C.free(unsafe.Pointer(ptr))
 
 	var size C.int
-	if int(C.chromaprint_get_raw_fingerprint(ctx.context, (**C.uint32_t)(unsafe.Pointer(&ptr)), &size)) < 1 {
+	if int(C.chromaprint_get_raw_fingerprint(ctx.context, (**C.uint32_t)(unsafe.Pointer(ptr)), &size)) < 1 {
 		return nil, ErrRawFprint
 	}
 
