@@ -92,7 +92,7 @@ func (ctx *ChromaprintContext) Start(sampleRate, numChannels int) error {
 // native byte-order, which in most architectures such as Intel x86
 // and x86-64 is little-endian.
 func (ctx *ChromaprintContext) Feed(data []byte) error {
-	if int(C.chromaprint_feed(ctx.context, unsafe.Pointer(&data[0]), C.int(len(data)/2))) < 1 {
+	if int(C.chromaprint_feed(ctx.context, (*C.int16_t)(unsafe.Pointer(&data[0])), C.int(len(data)/2))) < 1 {
 		return ErrFeed
 	}
 	return nil
@@ -127,7 +127,7 @@ func (ctx *ChromaprintContext) GetRawFingerprint() (fprint []int32, err error) {
 	defer C.free(unsafe.Pointer(ptr))
 
 	var size C.int
-	if int(C.chromaprint_get_raw_fingerprint(ctx.context, ptr, &size)) < 1 {
+	if int(C.chromaprint_get_raw_fingerprint(ctx.context, (**C.uint32_t)(unsafe.Pointer(ptr)), &size)) < 1 {
 		return nil, ErrRawFprint
 	}
 
