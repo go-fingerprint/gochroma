@@ -15,6 +15,7 @@ import "C"
 import (
 	"errors"
 	"reflect"
+	"time"
 	"unsafe"
 )
 
@@ -133,6 +134,17 @@ func (ctx *ChromaprintContext) GetRawFingerprint() (fprint []int32, err error) {
 
 	fprint = goInt32s(*ptr, int(size))
 	return
+}
+
+// GetItemDuration returns the duration of one item in the raw fingerprint in milliseconds.
+func (ctx *ChromaprintContext) GetItemDuration() time.Duration {
+	ms := int(C.chromaprint_get_item_duration_ms(ctx.context))
+	return time.Duration(ms) * time.Millisecond
+}
+
+// GetItemDurationSamples returns the duration of one item in the raw fingerprint in samples.
+func (ctx *ChromaprintContext) GetItemDurationSamples() int {
+	return int(C.chromaprint_get_item_duration(ctx.context))
 }
 
 func goInt32s(ptr unsafe.Pointer, size int) (ints []int32) {
