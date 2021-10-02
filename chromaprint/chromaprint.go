@@ -147,6 +147,16 @@ func (ctx *ChromaprintContext) GetItemDurationSamples() int {
 	return int(C.chromaprint_get_item_duration(ctx.context))
 }
 
+// GetSampleRate gets the sampling rate that is internally used for fingerprinting.
+func (ctx *ChromaprintContext) GetSampleRate() int {
+	return int(C.chromaprint_get_sample_rate(ctx.context))
+}
+
+// GetNumChannels gets the number of channels that is internally used for fingerprinting.
+func (ctx *ChromaprintContext) GetNumChannels() int {
+	return int(C.chromaprint_get_num_channels(ctx.context))
+}
+
 func goInt32s(ptr unsafe.Pointer, size int) (ints []int32) {
 	hdr := reflect.SliceHeader{
 		Data: uintptr(ptr),
