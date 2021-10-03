@@ -4,5 +4,5 @@ Go bindings and high-level API to acoustic fingerprinting library chromaprint
 
 #### Licenses
 
-* chromaprint: [LGPL2.1] (http://www.gnu.org/licenses/lgpl-2.1.html)
+* chromaprint: [LGPL2.1](http://www.gnu.org/licenses/lgpl-2.1.html)
 * gochroma: MIT
